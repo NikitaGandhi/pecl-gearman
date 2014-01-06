@@ -550,14 +550,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_gearman_client_add_task, 0, 0, 3)
 	ZEND_ARG_INFO(0, client_object)
 	ZEND_ARG_INFO(0, function_name)
 	ZEND_ARG_INFO(0, workload)
-	ZEND_ARG_INFO(0, context)
+	ZEND_ARG_INFO(1, context)
 	ZEND_ARG_INFO(0, unique)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_oo_gearman_client_add_task, 0, 0, 2)
 	ZEND_ARG_INFO(0, function_name)
 	ZEND_ARG_INFO(0, workload)
-	ZEND_ARG_INFO(0, context)
+	ZEND_ARG_INFO(1, context)
 	ZEND_ARG_INFO(0, unique)
 ZEND_END_ARG_INFO()
 
@@ -2352,7 +2352,6 @@ PHP_FUNCTION(gearman_client_add_task) {
 		/* add zdata tothe task object and pass the task object via context
 		 * task->client= zobj; */
 		task->zdata= zdata;
-		Z_ADDREF_P(zdata);
 	}
 
 	/* store our workload and add ref so it wont go away on us */
